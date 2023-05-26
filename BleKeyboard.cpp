@@ -1,3 +1,4 @@
+// copied from https://github.com/T-vK/ESP32-BLE-Keyboard
 #include "BleKeyboard.h"
 
 #if defined(USE_NIMBLE)
@@ -207,6 +208,19 @@ void BleKeyboard::sendReport(MediaKeyReport* keys)
     this->inputMediaKeys->notify();
 #if defined(USE_NIMBLE)        
     //vTaskDelay(delayTicks);
+    this->delay_ms(_delay_ms);
+#endif // USE_NIMBLE
+  }	
+}
+
+void BleKeyboard::sendUSBReport(uint8_t* keys)
+{
+  if (this->isConnected())
+  {
+    this->inputKeyboard->setValue((uint8_t*)keys, sizeof(KeyReport));
+    this->inputKeyboard->notify();
+#if defined(USE_NIMBLE)        
+    // vTaskDelay(delayTicks);
     this->delay_ms(_delay_ms);
 #endif // USE_NIMBLE
   }	

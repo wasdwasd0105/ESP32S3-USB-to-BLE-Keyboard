@@ -1,5 +1,5 @@
 // uncomment the following line to use NimBLE library
-//#define USE_NIMBLE
+#define USE_NIMBLE
 
 #ifndef ESP32_BLE_KEYBOARD_H
 #define ESP32_BLE_KEYBOARD_H
@@ -155,6 +155,7 @@ public:
   void end(void);
   void sendReport(KeyReport* keys);
   void sendReport(MediaKeyReport* keys);
+  void sendUSBReport(uint8_t* keys);
   size_t press(uint8_t k);
   size_t press(const MediaKeyReport k);
   size_t release(uint8_t k);
